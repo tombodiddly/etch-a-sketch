@@ -14,7 +14,10 @@ let gridSize = sliderRange.value;
 function grid (gridSize){
     for(let i = 0; i < gridSize ** 2; i++){
         let square = document.createElement('div');
-        //square.style.border = '1px solid rgba(0, 0, 0, .3)';
+        square.addEventListener('mouseover',()=>{
+            square.style.backgroundColor = 'black';
+        })
+
         square.style.height = height/gridSize+'px';
         square.style.width = width/gridSize+'px';
         document.getElementById('gameboard').appendChild(square);
@@ -36,11 +39,18 @@ function removeAllChildNodes(parent){
 sliderRange.addEventListener('change', ()=>{
     sliderCurrentValue.textContent = sliderRange.value;
     gridSize = sliderRange.value;
-    //remove all divs from gameboard
     removeAllChildNodes(gameboard);
     grid(gridSize);
 })
 
 
 
-
+let clearChanges = document.getElementById('clearChanges');
+clearChanges.addEventListener('click', () => {
+    sliderRange.value = 16;
+    sliderCurrentValue.textContent = sliderRange.value;
+    gridSize = 16
+    removeAllChildNodes(gameboard);
+    grid(gridSize);
+    
+})
